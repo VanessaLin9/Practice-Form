@@ -39,20 +39,19 @@
   flex-direction: column;
   justify-content:center;
   align-items: center;
-  margin: 10px auto;
+  margin: 40px auto;
   border: 1px solid #282c34;
   padding:0;
 }
 
 .inputForm {
  width: 100%;
-  /* border: 1px solid #282c34; */
   
 }
 
 .inputBox {
   width: 100%;
-  border-bottom: 1px solid tomato;
+  border-bottom: 1px solid #282c34;
   padding: 20px;
   display: flex;
   align-items: center;
@@ -61,4 +60,11 @@
 .hint {
   padding: 5px;
   margin-right: 10px;
+}
+.inputBox .showImg {
+  width:200px;
+}
+.inputBox .showImg img {
+  width: 100%;
+  vertical-align: middle;
 }
