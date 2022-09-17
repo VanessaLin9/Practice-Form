@@ -3,13 +3,13 @@
 }
 
 
-@media (prefers-reduced-motion: no-preference) {
+/* @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
-}
+} */
 
-.App-header {
+/* .App-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -18,9 +18,9 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
+} */
 
-.App-link {
+/* .App-link {
   color: #61dafb;
 }
 
@@ -31,8 +31,11 @@
   to {
     transform: rotate(360deg);
   }
+} */
+body {
+  height: 100vh;
+  background: linear-gradient(0deg, rgb(161, 216, 236), rgb(239, 239, 173))fixed center center/100% 100%;
 }
-
 .container {
   width: 500px;
   display: flex;
@@ -41,7 +44,10 @@
   align-items: center;
   margin: 40px auto;
   border: 1px solid #282c34;
+  border-radius: 25px;
   padding:0;
+  background-color: #fff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .6)
 }
 
 .inputForm {
@@ -61,10 +67,20 @@
   padding: 5px;
   margin-right: 10px;
 }
+.inputBox .checkItem {
+  margin: 0 3px;
+}
+.inputBox .mutiBox {
+  margin: 3px;
+}
 .inputBox .showImg {
   width:200px;
 }
 .inputBox .showImg img {
   width: 100%;
   vertical-align: middle;
+}
+.submitBtn {
+  justify-content: flex-end;
+  border-bottom: none;
 }

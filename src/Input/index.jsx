@@ -1,5 +1,11 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 const eatSomething = [{label:'早餐', finish:false}, {label:'午餐', finish:false}, {label:'晚餐', finish:false}]
+
+function validateEmail(email) {
+  const re =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(email).toLowerCase());
+}
 
 const Input = ()=> {
   const [text, setText] = useState('')
@@ -8,7 +14,12 @@ const Input = ()=> {
   const [select, setSelect] = useState('')
   const [nameInput, setNameInput] = useState('')
   const [emailInput, setEmailInput] = useState('')
+  const [validateResult, setValidateResult] = useState('')
   const [base64, setBase64] = useState('')
+  useEffect(()=> {
+    const isValidateEmail = validateEmail(emailInput)
+    setValidateResult(isValidateEmail)
+  }, [emailInput])
 
   const atInputChange= (e) => {
     const idx = e.target.dataset.index /1
@@ -32,16 +43,17 @@ const Input = ()=> {
     <div className="inputBox">
       <p className="hint">請輸入文字:</p>
        <label htmlFor="">
-        <input type="text" value={text} onChange={(e)=> setText(e.target.value)}/>
+        <input type="text" autoFocus value={text} onChange={(e)=> setText(e.target.value)}/>
       </label>
     </div>
    
     <div className="inputBox">
-      <p className="hint">radio:</p>
+      <p className="hint">Radio:</p>
       <label htmlFor="">
         <input 
           type="radio" 
           name="radioBoolean"
+          className="checkItem"
           value="yes"
           checked={radio ==='yes'}
           onChange={(e)=> setRadio(e.target.value)}/>yes
@@ -50,6 +62,7 @@ const Input = ()=> {
         <input 
         type="radio" 
         name="radioBoolean"
+        className="checkItem"
         value="no"
         checked={radio ==='no'}
         onChange={(e)=> setRadio(e.target.value)}/>no
@@ -57,12 +70,13 @@ const Input = ()=> {
     </div>
 
     <div className="inputBox">
-      <p className="hint">checkbox:</p>
+      <p className="hint">Checkbox:</p>
        {checkBox.map(({label, finish}, index)=> {
         return (
           <label key={label}>
             <input 
             data-index={index}
+            className="checkItem"
             type="checkbox" 
             value={label} 
             checked={finish}  
@@ -86,14 +100,18 @@ const Input = ()=> {
       {/* TODO validate email */}
     <div className="inputBox">
       <p className="hint">MutiInput:</p>
+      <div className="mutiBox">
         <input type="text" value={nameInput} onChange={(e) => setNameInput(e.target.value)} placeholder="Name"/>
+        <p>ok</p>
+      </div>
+      
+      <div className="mutiBox">
         <input type="text" value={emailInput} onChange={(e)=> setEmailInput(e.target.value)} placeholder="Email" />
+        <p>{validateResult? 'ok': 'error'}</p>
+      </div>
     </div>
 
-    
-
-   </form>
-   <div className="inputBox">
+    <div className="inputBox">
       <p className="hint">上傳圖片:</p> 
       <input 
       type="file" 
@@ -105,6 +123,12 @@ const Input = ()=> {
       </div>
       
     </div>
+
+    <div className="inputBox submitBtn">
+      <button type='submit' className="">submit</button>
+    </div>
+    
+   </form>
    </div>
   )
 }
