@@ -1,0 +1,85 @@
+$border: 1px solid #282c34;
+@mixin flexCenter ($direction){
+  display: flex;
+  flex-direction: $direction;
+  align-items: center;
+}
+
+body{
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+/* reset */
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: 'Noto Sans TC', sans-serif;
+}
+ a,
+ a:hover,
+ a:focus {
+   text-decoration: none;
+ }
+.btn,
+button,
+button:focus,
+input:focus,
+textarea:focus,
+select,
+select:focus,
+a:focus {
+  outline: 0px !important;
+}
+
+body {
+  height: 100vh;
+  background: linear-gradient(0deg, rgb(161, 216, 236), rgb(239, 239, 173))fixed center center/100% 100%;
+}
+
+.container {
+  width: 500px;
+  margin: 40px auto;
+  border: $border;
+  border-radius: 25px;
+  background-color: #fff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .6);
+  .inputBox {
+      width: 100%;
+      border-bottom: $border;
+      padding: 20px;
+      box-sizing: border-box;
+      @include flexCenter(row);
+      .hint {
+          padding: 5px;
+          margin-right: 10px;
+        };
+      .checkItem {
+        margin: 0 3px;
+      };
+      .mutiBox {
+        margin: 3px;
+      };
+      .showImg {
+        width: 200px;
+        img {
+            width: 100%;
+            vertical-align: middle;
+          }
+      }
+    };
+  .submitBtn {
+    justify-content: flex-end;
+    border-bottom: none;
+  }
+}
+

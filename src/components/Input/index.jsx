@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 const eatSomething = [{label:'早餐', finish:false}, {label:'午餐', finish:false}, {label:'晚餐', finish:false}]
 
+// TODO Email validation
 function validateEmail(email) {
   const re =
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -97,7 +98,6 @@ const Input = ()=> {
       </select>
     </div>
 
-      {/* TODO validate email */}
     <div className="inputBox">
       <p className="hint">MutiInput:</p>
       <div className="mutiBox">
