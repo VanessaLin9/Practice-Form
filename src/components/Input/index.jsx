@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react'
+import {Link} from 'react-router-dom'
+
 const eatSomething = [{label:'早餐', finish:false}, {label:'午餐', finish:false}, {label:'晚餐', finish:false}]
 
 // TODO Email validation
@@ -126,6 +128,7 @@ const Input = ()=> {
 
     <div className="inputBox submitBtn">
       <button type='submit' className="">submit</button>
+      <Link to='page2'>next page</Link>
     </div>
     
    </form>
