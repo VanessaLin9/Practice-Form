@@ -5,3 +5,5 @@ Learning Target:
 - 各種形式的表格input
 - real time email validation
 - control and uncontrol(file input) components
+- use 'react-router-dom' build SPA
+- use 'react-hook-form' control form input

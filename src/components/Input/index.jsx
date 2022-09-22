@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const eatSomething = [{label:'早餐', finish:false}, {label:'午餐', finish:false}, {label:'晚餐', finish:false}]
 
@@ -10,6 +10,7 @@ function validateEmail(email) {
   return re.test(String(email).toLowerCase());
 }
 
+// 6 type input
 const Input = ()=> {
   const [text, setText] = useState('')
   const [radio, setRadio]= useState('yes')
@@ -19,16 +20,17 @@ const Input = ()=> {
   const [emailInput, setEmailInput] = useState('')
   const [validateResult, setValidateResult] = useState('')
   const [base64, setBase64] = useState('')
+
   useEffect(()=> {
     const isValidateEmail = validateEmail(emailInput)
     setValidateResult(isValidateEmail)
   }, [emailInput])
 
   const atInputChange= (e) => {
-    const idx = e.target.dataset.index /1
-    const newCheckBoxArr = checkBox.concat()
-    newCheckBoxArr[idx].finish = !newCheckBoxArr[idx].finish
-    setCheckBox(newCheckBoxArr)
+    const idx = e.target.dataset.index/1
+    const newCheckBox = checkBox.concat()
+    newCheckBox[idx].finish = !newCheckBox[idx].finish
+    setCheckBox(newCheckBox)
   }
   const atFileChange = (e) => {
     const file = e.target.files[0]
@@ -39,10 +41,25 @@ const Input = ()=> {
     reader.readAsDataURL(file)
   }
 
-  return (
-  <div className="container">
+  const onSubmit = (event) => {
+    event.preventDefault()
+    const data = {
+      text,
+      radio,
+      checkBox,
+      select,
+      nameInput,
+      emailInput,
+      base64,
+    }
+    console.log(data)
+  }
 
-   <form className="inputForm">
+ return (
+  <div className="container">
+   <div className='title'>useState</div>
+   <form className="inputForm" onSubmit={onSubmit}>
+  
     <div className="inputBox">
       <p className="hint">請輸入文字:</p>
        <label htmlFor="">
