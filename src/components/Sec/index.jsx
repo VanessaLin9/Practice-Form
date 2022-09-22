@@ -6,7 +6,7 @@ const todoList = [{label: '阿土麵', finish: false}, {label: '炒板條', fini
 
 
 export default function Sec(){
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, formState: { errors }} = useForm();
   const [base64 , setBase64] = useState('');
 
   const atFileChange =(e) => {
@@ -34,7 +34,10 @@ export default function Sec(){
       <form className="inputForm" onSubmit={handleSubmit(atSubmit)}>
         <div className="inputBox">
           <p className="hint">是否有過敏食材:</p>
-          <input type="text" placeholder='本店不提供香菜' {...register('text', {required: true})}/>
+          <div>
+            <input type="text" placeholder='本店不提供香菜' {...register('text', {required: true})}/>
+          {errors.text && <span>This field is required</span>}
+          </div>
         </div>
 
         <div className="inputBox">
@@ -79,9 +82,11 @@ export default function Sec(){
           <p className="hint">取餐資訊:</p>
           <div className="mutiBox">
             <input type="text" placeholder="姓名" {...register('name', {required: true, maxLength: 20 })}/>
+            {errors.name && <span>This field is required</span>}
           </div>
           <div className="mutiBox">
-            <input type="text" placeholder="手機" {...register('tel', {required: true, maxLength: 10})}/>
+            <input type="text" placeholder="手機" {...register('tel', {required: true, pattern: /^09\d{2}-?\d{3}-?\d{3}$/})}/>
+            {errors.tel && <span>This field is required</span>}
           </div>
         </div>
 
