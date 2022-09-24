@@ -35,7 +35,7 @@ export default function Sec(){
         <div className="inputBox">
           <p className="hint">是否有過敏食材:</p>
           <div>
-            <input type="text" placeholder='本店不提供香菜' {...register('text', {required: true})}/>
+            <input className='border-2 px-1' type="text" placeholder='本店不提供香菜' {...register('text', {required: true})}/>
           {errors.text && <span>This field is required</span>}
           </div>
         </div>
@@ -78,14 +78,15 @@ export default function Sec(){
           </select>
         </div>
 
+{/* TODO react-input-mask */}
         <div className="inputBox">
           <p className="hint">取餐資訊:</p>
           <div className="mutiBox">
-            <input type="text" placeholder="姓名" {...register('name', {required: true, maxLength: 20 })}/>
+            <input className='border-2 px-1' type="text" placeholder="姓名" {...register('name', {required: true, maxLength: 20 })}/>
             {errors.name && <span>This field is required</span>}
           </div>
           <div className="mutiBox">
-            <input type="text" placeholder="手機" {...register('tel', {required: true, pattern: /^09\d{2}-?\d{3}-?\d{3}$/})}/>
+            <input className='border-2 px-1' type="text" placeholder="手機" {...register('tel', {required: true, pattern: /^09\d{2}-?\d{3}-?\d{3}$/})}/>
             {errors.tel && <span>This field is required</span>}
           </div>
         </div>
@@ -103,7 +104,7 @@ export default function Sec(){
         </div>
 
         <div className="inputBox submitBtn">
-          <button type='submit'>submit</button>
+          <button type='submit' className="bg-gray-500 m-3 px-2 rounded">submit</button>
           <Link to='/'>prev page</Link>
         </div>
       </form>

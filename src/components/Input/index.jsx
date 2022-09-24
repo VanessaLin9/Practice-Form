@@ -63,7 +63,7 @@ const Input = ()=> {
     <div className="inputBox">
       <p className="hint">請輸入文字:</p>
        <label htmlFor="">
-        <input type="text" autoFocus value={text} onChange={(e)=> setText(e.target.value)}/>
+        <input className='border-2 px-1' type="text" autoFocus value={text} onChange={(e)=> setText(e.target.value)}/>
       </label>
     </div>
    
@@ -120,12 +120,12 @@ const Input = ()=> {
     <div className="inputBox">
       <p className="hint">MutiInput:</p>
       <div className="mutiBox">
-        <input type="text" value={nameInput} onChange={(e) => setNameInput(e.target.value)} placeholder="Name"/>
+        <input className='border-2 px-1' type="text" value={nameInput} onChange={(e) => setNameInput(e.target.value)} placeholder="Name"/>
         <p>ok</p>
       </div>
       
       <div className="mutiBox">
-        <input type="text" value={emailInput} onChange={(e)=> setEmailInput(e.target.value)} placeholder="Email" />
+        <input className='border-2 px-1' type="text" value={emailInput} onChange={(e)=> setEmailInput(e.target.value)} placeholder="Email" />
         <p>{validateResult? 'ok': 'error'}</p>
       </div>
     </div>
@@ -144,7 +144,7 @@ const Input = ()=> {
     </div>
 
     <div className="inputBox submitBtn">
-      <button type='submit' className="">submit</button>
+      <button type='submit' className="bg-gray-500 m-3 px-2 rounded">submit</button>
       <Link to='page2'>next page</Link>
     </div>
     
