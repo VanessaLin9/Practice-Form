@@ -25,7 +25,7 @@ export default function Sec(){
       }
       return console.log(newData)
     }
-    console.log(data)
+    
   }
 
   return(
@@ -105,7 +105,6 @@ export default function Sec(){
 
         <div className="inputBox submitBtn">
           <button type='submit' className="bg-gray-500 m-3 px-2 rounded">submit</button>
-          <Link to='/'>prev page</Link>
         </div>
       </form>
     </div>

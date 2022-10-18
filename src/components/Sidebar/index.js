@@ -7,7 +7,7 @@ const SideBar = () => {
       
       <Link to='/'><SideBarIcon icon={<FaFire size="28"/>}/></Link>
       <Link to='page2'><SideBarIcon icon={<FaUtensils size="25"/>}/></Link>
-      {/* <SideBarIcon icon={<FaTree size="28"/>}/> */}
+      <Link to='show'><SideBarIcon icon={<FaTree size="28"/>}/></Link>
     </div>
   )
 }
