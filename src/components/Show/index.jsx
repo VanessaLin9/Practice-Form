@@ -1,11 +1,26 @@
-export default function show (props){
- return (
-  <div className='container'>
-    <div className="flex items-center justify-center">
-      <h1>訂單資訊:</h1>
-     <pre>{JSON.stringify(props, null, 2)}</pre>
-    </div>
-  </div>
-  
- )
-}
+import { useState } from 'react';
+
+const Show = () => {
+  const [state, setState] = useState({
+    name: '',
+    email: '',
+  })
+
+  function atChange (e) {
+    const {value, name} = e.target;
+    setState((pre) => {
+      return {
+        ...pre,
+        [name]: value,
+      }
+    })
+  }
+
+  return (
+    <section className="container p-4">
+      123
+    </section>
+  )
+};
+
+export default Show;

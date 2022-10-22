@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import { useForm } from "react-hook-form";
+import { phoneValidate } from '../../helper';
 
 const todoList = [{label: '阿土麵', finish: false}, {label: '炒板條', finish: false}, {label: '薑絲炒大腸', finish: false}]
 
@@ -23,9 +24,9 @@ export default function Sec(){
         ...data,
         img: base64
       }
-      return console.log(newData)
+       console.log(newData)
     }
-    
+    // TODO data to show
   }
 
   return(
@@ -86,7 +87,7 @@ export default function Sec(){
             {errors.name && <span>This field is required</span>}
           </div>
           <div className="mutiBox">
-            <input className='border-2 px-1' type="text" placeholder="手機" {...register('tel', {required: true, pattern: /^09\d{2}-?\d{3}-?\d{3}$/})}/>
+            <input className='border-2 px-1' type="text" placeholder="手機" {...register('tel', {required: true, pattern: phoneValidate })}/>
             {errors.tel && <span>This field is required</span>}
           </div>
         </div>
