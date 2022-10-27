@@ -1,7 +1,7 @@
-import React, {useState} from 'react'
-// import { Link } from 'react-router-dom'
+import React, {useState} from 'react';
 import { useForm } from "react-hook-form";
 import { phoneValidate } from '../../helper';
+import InputMask from 'react-input-mask';
 
 const todoList = [{label: '阿土麵', finish: false}, {label: '炒板條', finish: false}, {label: '薑絲炒大腸', finish: false}]
 
@@ -25,6 +25,8 @@ export default function Sec(){
         img: base64
       }
        console.log(newData)
+    } else {
+      console.log(data)
     }
     // TODO data to show
   }
@@ -83,11 +85,20 @@ export default function Sec(){
         <div className="inputBox">
           <p className="hint">取餐資訊:</p>
           <div className="mutiBox">
-            <input className='border-2 px-1' type="text" placeholder="姓名" {...register('name', {required: true, maxLength: 20 })}/>
+            <input 
+              className='border-2 px-1' 
+              type="text" 
+              placeholder="姓名" 
+              {...register('name', {required: true, maxLength: 20 })}/>
             {errors.name && <span>This field is required</span>}
           </div>
           <div className="mutiBox">
-            <input className='border-2 px-1' type="text" placeholder="手機" {...register('tel', {required: true, pattern: phoneValidate })}/>
+            <InputMask 
+              className='border-2 px-1' 
+              type="text" 
+              placeholder="0911-123456"
+              mask="0\999-999999" 
+              {...register('tel', {required: true, pattern: phoneValidate })}/>
             {errors.tel && <span>This field is required</span>}
           </div>
         </div>

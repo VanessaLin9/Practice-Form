@@ -1,17 +1,19 @@
-import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import { emailValidate } from '../../helper';
+import { useState } from 'react';
+// import { Link } from 'react-router-dom'
+// import { emailValidate } from '../../helper';
+import InputMask from 'react-input-mask';
 
 const eatSomething = [{label:'早餐', finish:false}, {label:'午餐', finish:false}, {label:'晚餐', finish:false}]
 
 // TODO Email validation
-function validateEmail(email) {
-  return emailValidate.test(String(email).toLowerCase());
-}
+// function validateEmail(email) {
+//   return emailValidate.test(String(email).toLowerCase());
+// }
 
 
 // 6 type input
 const Input = ()=> {
+const [base64, setBase64] = useState('')
 const [state, setState] = useState({
   email: '',
   gender: '0',
@@ -19,17 +21,16 @@ const [state, setState] = useState({
   framework: '',
   name: '',
   phone: '',
+  file: '',
 });
 
 function atChange(e) {
   const { value, name } = e.target;
   if (name === 'feed') {
-    
   const index = e.target.dataset.index;
   const newArr = state.feed.concat()
-  
   newArr[index].finish = !newArr[index].finish
-  console.log(newArr)
+  
   setState((pre) => {
     return {
     ...pre,
@@ -43,11 +44,27 @@ function atChange(e) {
         [name]: value}})
   }
 }
+  function atFileChange(e){
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      setBase64(event.target.result)
+    }
+    reader.readAsDataURL(file)
+  };
 
   function onSubmit(e){
     e.preventDefault()
+    if (base64 !== ''){
+      const newData = {
+        ...state,
+        file: base64,
+      }
+      console.log(newData)
+    } else {
+      console.log(state)
+    }
     console.log('onSubmit')
-    console.log(state)
   } 
 
  return (
@@ -57,7 +74,7 @@ function atChange(e) {
     {/* text */}
     <div className="inputBox">
       <p className="hint">Email:</p>
-      <input 
+      <input
       type="text"
       name="email"
       value={state.email}
@@ -126,10 +143,11 @@ function atChange(e) {
         name="name" 
         value={state.name}
         onChange={atChange}/>
-      <input 
+      <InputMask 
         type="text" 
-        placeholder='phone'
+        placeholder='0910-123456'
         name="phone"
+        mask="0\999-999999"
         value={state.phone}
         onChange={atChange}/>
     </div>
@@ -137,7 +155,15 @@ function atChange(e) {
     {/* img upload */}
     <div className="inputBox">
       <p className="hint">Image upload:</p>
-      <input type="file" />
+      <input 
+        type="file"
+        name="file"
+        accept='.jpg, .png'
+        onChange={atFileChange} />
+      <div className="showImg">
+          {base64 && <img src={base64} alt=""/> }
+      </div>
+      
     </div>
     
     <div className="inputBox submitBtn">
