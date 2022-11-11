@@ -1,19 +1,15 @@
 import { useState } from 'react';
 // import { Link } from 'react-router-dom'
-// import { emailValidate } from '../../helper';
 import InputMask from 'react-input-mask';
+import { emailValidate } from '../../helper';
+import { useNavigate } from 'react-router-dom';
 
 const eatSomething = [{label:'早餐', finish:false}, {label:'午餐', finish:false}, {label:'晚餐', finish:false}]
 
-// TODO Email validation
-// function validateEmail(email) {
-//   return emailValidate.test(String(email).toLowerCase());
-// }
-
-
 // 6 type input
 const Input = ()=> {
-const [base64, setBase64] = useState('')
+const [base64, setBase64] = useState('');
+const navigation = useNavigate();
 const [state, setState] = useState({
   email: '',
   gender: '0',
@@ -23,6 +19,7 @@ const [state, setState] = useState({
   phone: '',
   file: '',
 });
+const [validate, setValidate] = useState(true)
 
 function atChange(e) {
   const { value, name } = e.target;
@@ -30,13 +27,19 @@ function atChange(e) {
   const index = e.target.dataset.index;
   const newArr = state.feed.concat()
   newArr[index].finish = !newArr[index].finish
-  
   setState((pre) => {
     return {
-    ...pre,
-    feed: newArr,
-  } 
-  }) 
+      ...pre,
+      feed: newArr,
+    } 
+    }) 
+  } else if (name === 'email') {
+    const result = emailValidate.test(value)
+    setValidate(result)
+    setState((pre) => {
+      return {
+        ...pre,
+        email: value}})
   } else {
      setState((pre) => {
       return {
@@ -44,28 +47,31 @@ function atChange(e) {
         [name]: value}})
   }
 }
-  function atFileChange(e){
-    const file = e.target.files[0];
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      setBase64(event.target.result)
-    }
-    reader.readAsDataURL(file)
-  };
 
-  function onSubmit(e){
-    e.preventDefault()
-    if (base64 !== ''){
-      const newData = {
-        ...state,
-        file: base64,
-      }
-      console.log(newData)
-    } else {
-      console.log(state)
+function atFileChange(e){
+  const file = e.target.files[0];
+  const reader = new FileReader();
+  reader.onload = (event) => {
+    setBase64(event.target.result)
+  }
+  reader.readAsDataURL(file)
+};
+
+function onSubmit(e){
+  e.preventDefault()
+  if (base64 !== ''){
+    const newData = {
+      ...state,
+      file: base64,
     }
-    console.log('onSubmit')
-  } 
+    console.log(newData)
+  } else {
+    console.log(state)
+  }
+  navigation('/show', {state: state})
+  
+  console.log('onSubmit')
+} 
 
  return (
   <div className="container">
@@ -81,6 +87,7 @@ function atChange(e) {
       onChange={atChange}
       placeholder='email@email.com'
       className='border m-1 p-1 border-slate-500' />
+      {!validate && <span>inValidate email</span>}
     </div>
     
     {/* radio */}
