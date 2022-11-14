@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { useForm } from "react-hook-form";
 import { phoneValidate } from '../../helper';
 import InputMask from 'react-input-mask';
+import { useNavigate } from 'react-router-dom';
 
 const todoList = [{label: '阿土麵', finish: false}, {label: '炒板條', finish: false}, {label: '薑絲炒大腸', finish: false}]
 
@@ -9,6 +10,7 @@ const todoList = [{label: '阿土麵', finish: false}, {label: '炒板條', fini
 export default function Sec(){
   const { register, handleSubmit, formState: { errors }} = useForm();
   const [base64 , setBase64] = useState('');
+  const navigation = useNavigate();
 
   const atFileChange =(e) => {
     const file = e.target.files[0]
@@ -28,12 +30,13 @@ export default function Sec(){
     } else {
       console.log(data)
     }
-    // TODO data to show
+    navigation('/page2/show', {state: data})
+    console.log('react router dom Submit')
   }
 
   return(
     <div className='container'>
-      <div className='title'>react hook form</div>
+      <div className='title'>使用 react hook form 管理表單資訊</div>
       <form className="inputForm" onSubmit={handleSubmit(atSubmit)}>
         <div className="inputBox">
           <p className="hint">是否有過敏食材:</p>

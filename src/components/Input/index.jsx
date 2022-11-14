@@ -68,14 +68,13 @@ function onSubmit(e){
   } else {
     console.log(state)
   }
-  navigation('/show', {state: state})
-  
+  navigation('/page1/show', {state: state})
   console.log('onSubmit')
 } 
 
  return (
   <div className="container">
-   <div className='title'>useState</div>
+   <div className='title'>使用 useState 管理表單資訊</div>
    <form className="inputForm" onSubmit={onSubmit}>
     {/* text */}
     <div className="inputBox">
