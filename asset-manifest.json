@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/Practice-Form/static/css/main.b45d8fed.css",
-    "main.js": "/Practice-Form/static/js/main.fdaf006c.js",
+    "main.css": "/Practice-Form/static/css/main.01513332.css",
+    "main.js": "/Practice-Form/static/js/main.b94e32ee.js",
     "static/js/787.e12b8c2b.chunk.js": "/Practice-Form/static/js/787.e12b8c2b.chunk.js",
     "index.html": "/Practice-Form/index.html",
-    "main.b45d8fed.css.map": "/Practice-Form/static/css/main.b45d8fed.css.map",
-    "main.fdaf006c.js.map": "/Practice-Form/static/js/main.fdaf006c.js.map",
+    "main.01513332.css.map": "/Practice-Form/static/css/main.01513332.css.map",
+    "main.b94e32ee.js.map": "/Practice-Form/static/js/main.b94e32ee.js.map",
     "787.e12b8c2b.chunk.js.map": "/Practice-Form/static/js/787.e12b8c2b.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.b45d8fed.css",
-    "static/js/main.fdaf006c.js"
+    "static/css/main.01513332.css",
+    "static/js/main.b94e32ee.js"
   ]
 }
