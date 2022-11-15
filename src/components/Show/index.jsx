@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, Navigate } from "react-router-dom";
 import ShowPage1 from "./ShowPage1";
 import ShowPage2 from "./ShowPage2";
 
@@ -7,16 +7,16 @@ const Show = () => {
   let info = <p>請填寫訂單</p>
 
   if (location.pathname === '/page1/show'){
-    // TODO 轉址
-    if (!location.state) return;
+    // page1的展示頁面
+    if (!location.state) return <Navigate to='/page1' replace/>; // 缺資料轉址
     // 整理資料送到子層
     const {state} = location;
     const e = state.feed.filter(eat => eat.finish).map(eat => eat.label).join(',') 
     const data = {...state, feed: e}
     info = <ShowPage1 state={data}/>
   } else if (location.pathname === '/page2/show'){
-    // TODO 轉址
-    if (!location.state) return;
+    // page2的展示頁面
+    if (!location.state) return <Navigate to='/page2' replace/>; // 缺資料轉址
     const {state} = location;
     info = <ShowPage2 state={state}/>
   }

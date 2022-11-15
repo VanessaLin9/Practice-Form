@@ -1,15 +1,15 @@
 import { useState } from 'react';
 // import { Link } from 'react-router-dom'
 import InputMask from 'react-input-mask';
-import { emailValidate } from '../../helper';
+import { emailValidate, phoneValidate } from '../../helper';
 import { useNavigate } from 'react-router-dom';
 
 const eatSomething = [{label:'早餐', finish:false}, {label:'午餐', finish:false}, {label:'晚餐', finish:false}]
 
 // 6 type input
 const Input = ()=> {
-const [base64, setBase64] = useState('');
 const navigation = useNavigate();
+const [base64, setBase64] = useState('');
 const [state, setState] = useState({
   email: '',
   gender: '0',
@@ -19,10 +19,16 @@ const [state, setState] = useState({
   phone: '',
   file: '',
 });
-const [validate, setValidate] = useState(true)
+const [validate, setValidate] = useState({
+  email: '',
+  name: '',
+  phone: '',
+})
 
 function atChange(e) {
   const { value, name } = e.target;
+  atCheckValidation(name, value)
+
   if (name === 'feed') {
   const index = e.target.dataset.index;
   const newArr = state.feed.concat()
@@ -34,8 +40,6 @@ function atChange(e) {
     } 
     }) 
   } else if (name === 'email') {
-    const result = emailValidate.test(value)
-    setValidate(result)
     setState((pre) => {
       return {
         ...pre,
@@ -48,6 +52,70 @@ function atChange(e) {
   }
 }
 
+// validation
+function atCheckValidation(name, value){
+  // email
+  if(name === 'email'){
+    const result = emailValidate.test(value)
+    if(!value.trim()){ 
+      setValidate((pre) => {
+        return {
+        ...pre,
+        email: "Email is required"
+      }})
+    } else if (!result){
+      setValidate((pre) => {
+        return {
+        ...pre,
+        email: "Please ingress a validate email address"
+      }})
+    } else {
+      setValidate((pre) => {
+        return {
+        ...pre,
+        email: ""
+      }})
+    }
+  }
+  
+  // name
+  if(name === 'name'){
+    if(!value.trim()){
+      setValidate((pre) => {
+        return {
+        ...pre,
+        name: "name is required"
+      }})
+    } else {
+      setValidate((pre) => {
+        return {
+        ...pre,
+        name: ""
+      }})
+    }
+  }
+  // phone
+  if(name === 'phone'){
+    const result = phoneValidate.test(value)
+    if(!result){
+      setValidate((pre) => {
+        return {
+        ...pre,
+        phone: "Invalidate phone number"
+      }})
+    } else {
+      setValidate((pre) => {
+        return {
+        ...pre,
+        phone: ""
+      }})
+    }
+  }
+  console.log('validate',validate)
+  return;
+}
+
+// 上傳檔案
 function atFileChange(e){
   const file = e.target.files[0];
   const reader = new FileReader();
@@ -59,6 +127,7 @@ function atFileChange(e){
 
 function onSubmit(e){
   e.preventDefault()
+  // TODO 表單驗證
   if (base64 !== ''){
     const newData = {
       ...state,
@@ -79,14 +148,16 @@ function onSubmit(e){
     {/* text */}
     <div className="inputBox">
       <p className="hint">Email:</p>
-      <input
-      type="text"
-      name="email"
-      value={state.email}
-      onChange={atChange}
-      placeholder='email@email.com'
-      className='border m-1 p-1 border-slate-500' />
-      {!validate && <span>inValidate email</span>}
+      <div>
+        <input
+        type="text"
+        name="email"
+        value={state.email}
+        onChange={atChange}
+        placeholder='email@email.com'
+        className='border m-1 p-1 border-slate-500' />
+        {validate.email && <span>{validate.email}</span>}
+      </div>
     </div>
     
     {/* radio */}
@@ -143,19 +214,25 @@ function onSubmit(e){
     {/* muti text */}
     <div className="inputBox">
       <p className="hint">Muti:</p>
-      <input 
-        type="text" 
-        placeholder='name'
-        name="name" 
-        value={state.name}
-        onChange={atChange}/>
-      <InputMask 
-        type="text" 
-        placeholder='0910-123456'
-        name="phone"
-        mask="0\999-999999"
-        value={state.phone}
-        onChange={atChange}/>
+      <div>
+        <input 
+          type="text" 
+          placeholder='name'
+          name="name" 
+          value={state.name}
+          onChange={atChange}/>
+        {validate.name && <span>{validate.name}</span>}
+      </div>
+      <div>
+        <InputMask 
+          type="text" 
+          placeholder='0910-123456'
+          name="phone"
+          mask="0\999-999999"
+          value={state.phone}
+          onChange={atChange}/>
+        {validate.phone && <span>{validate.phone}</span>}
+      </div>
     </div>
 
     {/* img upload */}
