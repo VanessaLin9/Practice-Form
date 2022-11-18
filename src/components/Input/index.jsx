@@ -1,7 +1,7 @@
 import { useState } from 'react';
 // import { Link } from 'react-router-dom'
 import InputMask from 'react-input-mask';
-import { emailValidate, phoneValidate } from '../../helper';
+import { emailValidate, phoneValidate, inputValidate } from '../../helper';
 import { useNavigate } from 'react-router-dom';
 
 const eatSomething = [{label:'早餐', finish:false}, {label:'午餐', finish:false}, {label:'晚餐', finish:false}]
@@ -28,11 +28,12 @@ const [validate, setValidate] = useState({
 function atChange(e) {
   const { value, name } = e.target;
   atCheckValidation(name, value)
-
+  
   if (name === 'feed') {
   const index = e.target.dataset.index;
-  const newArr = state.feed.concat()
-  newArr[index].finish = !newArr[index].finish
+  const newArr = state.feed.concat();
+  newArr[index].finish = !newArr[index].finish;
+
   setState((pre) => {
     return {
       ...pre,
@@ -44,6 +45,14 @@ function atChange(e) {
       return {
         ...pre,
         email: value}})
+  } else if (name === 'name'){
+    // 危險符號輸入檢查
+    let validateName = value.replace(inputValidate, '')
+    setState((pre) => {
+      return {
+        ...pre,
+        name: validateName
+      }})
   } else {
      setState((pre) => {
       return {
@@ -54,7 +63,7 @@ function atChange(e) {
 
 // validation
 function atCheckValidation(name, value){
-  // email
+  // email validation
   if(name === 'email'){
     const result = emailValidate.test(value)
     if(!value.trim()){ 
@@ -77,8 +86,7 @@ function atCheckValidation(name, value){
       }})
     }
   }
-  
-  // name
+  // name validation
   if(name === 'name'){
     if(!value.trim()){
       setValidate((pre) => {
@@ -94,7 +102,7 @@ function atCheckValidation(name, value){
       }})
     }
   }
-  // phone
+  // phone validation
   if(name === 'phone'){
     const result = phoneValidate.test(value)
     if(!result){
@@ -111,7 +119,7 @@ function atCheckValidation(name, value){
       }})
     }
   }
-  console.log('validate',validate)
+  // console.log('validate',validate)
   return;
 }
 
@@ -127,7 +135,7 @@ function atFileChange(e){
 
 function onSubmit(e){
   e.preventDefault()
-  // TODO 表單驗證
+  // TODO 表單送出時確認驗證
   if (base64 !== ''){
     const newData = {
       ...state,

@@ -1,8 +1,9 @@
+import Home from './components/Home';
 import Input from './components/Input';
-import Sec from './components/Sec'
-import SideBar from './components/Sidebar'
-import Show from './components/Show'
-import {HashRouter, Routes, Route, Navigate} from 'react-router-dom'
+import Sec from './components/Sec';
+import SideBar from './components/Sidebar';
+import Show from './components/Show';
+import {HashRouter, Routes, Route, Navigate} from 'react-router-dom';
 
 
 function App() {
@@ -11,7 +12,7 @@ function App() {
     <section className='App'>
       <SideBar/>
       <Routes>
-        <Route path='/' element={<Input />}/>
+        <Route path='/' element={<Home />}/>
         <Route path='/page1' element={<Input />}/>
         <Route path='/page2' element={<Sec />}/>
         <Route path='/page1/show' element={<Show />}/>

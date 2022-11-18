@@ -84,7 +84,6 @@ export default function Sec(){
           </select>
         </div>
 
-{/* TODO react-input-mask */}
         <div className="inputBox">
           <p className="hint">取餐資訊:</p>
           <div className="mutiBox">

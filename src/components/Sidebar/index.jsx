@@ -6,8 +6,8 @@ const SideBar = () => {
     <div className="fixed top-0 left-0 h-screen w-16 m-0 flex flex-col bg-gray-900 text-white shadow-lg">
       
       <Link to='/'><SideBarIcon icon={<FaFire size="28"/>}/></Link>
-      <Link to='page2'><SideBarIcon icon={<FaUtensils size="25"/>}/></Link>
-      <Link to='show'><SideBarIcon icon={<FaTree size="28"/>}/></Link>
+      <Link to='page1'><SideBarIcon icon={<FaUtensils size="25"/>}/></Link>
+      <Link to='page2'><SideBarIcon icon={<FaTree size="28"/>}/></Link>
     </div>
   )
 }
