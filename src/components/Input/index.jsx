@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 // import { Link } from 'react-router-dom'
 import InputMask from 'react-input-mask';
 import { emailValidate, phoneValidate, inputValidate } from '../../helper';
@@ -72,12 +72,14 @@ function atCheckValidation(name, value){
         ...pre,
         email: "Email is required"
       }})
+      return false;
     } else if (!result){
       setValidate((pre) => {
         return {
         ...pre,
         email: "Please ingress a validate email address"
       }})
+      return false;
     } else {
       setValidate((pre) => {
         return {
@@ -94,6 +96,7 @@ function atCheckValidation(name, value){
         ...pre,
         name: "name is required"
       }})
+      return false;
     } else {
       setValidate((pre) => {
         return {
@@ -111,6 +114,7 @@ function atCheckValidation(name, value){
         ...pre,
         phone: "Invalidate phone number"
       }})
+      return false;
     } else {
       setValidate((pre) => {
         return {
@@ -119,8 +123,7 @@ function atCheckValidation(name, value){
       }})
     }
   }
-  // console.log('validate',validate)
-  return;
+  return true;
 }
 
 // 上傳檔案
@@ -133,9 +136,22 @@ function atFileChange(e){
   reader.readAsDataURL(file)
 };
 
-function onSubmit(e){
-  e.preventDefault()
-  // TODO 表單送出時確認驗證
+// 表單送出時確認驗證
+function onSubmitCheck(e){
+  e.preventDefault();
+  let nextStep = true;
+  for(let i in state){
+    let check = atCheckValidation(i,state[i])
+    nextStep = (nextStep && check)
+  }
+  console.log('nextStep', nextStep)
+  if(nextStep){
+    onSubmit()
+  }
+  return;
+}
+
+function onSubmit(){
   if (base64 !== ''){
     const newData = {
       ...state,
@@ -145,6 +161,7 @@ function onSubmit(e){
   } else {
     console.log(state)
   }
+  // TODO 照片也送過去show
   navigation('/page1/show', {state: state})
   console.log('onSubmit')
 } 
@@ -152,7 +169,7 @@ function onSubmit(e){
  return (
   <div className="container">
    <div className='title'>使用 useState 管理表單資訊</div>
-   <form className="inputForm" onSubmit={onSubmit}>
+   <form className="inputForm" onSubmit={onSubmitCheck}>
     {/* text */}
     <div className="inputBox">
       <p className="hint">Email:</p>
