@@ -23,7 +23,7 @@ const Show = () => {
  
 
   return (
-    <section className="container p-4">
+    <section className="orderForm">
       {info}
     </section>
   )

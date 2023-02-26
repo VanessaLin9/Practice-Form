@@ -167,7 +167,7 @@ function onSubmit(){
 } 
 
  return (
-  <div className="container">
+  <div className="orderForm">
    <div className='title'>使用 useState 管理表單資訊</div>
    <form className="inputForm" onSubmit={onSubmitCheck}>
     {/* text */}

@@ -35,7 +35,7 @@ export default function Sec(){
   }
 
   return(
-    <div className='container'>
+    <div className='orderForm'>
       <div className='title'>使用 react hook form 管理表單資訊</div>
       <form className="inputForm" onSubmit={handleSubmit(atSubmit)}>
         <div className="inputBox">

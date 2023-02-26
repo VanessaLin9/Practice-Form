@@ -2,8 +2,8 @@ const ShowPage2 = (props)=> {
   const {state} = props;
   
   return (
-  <>
-    <p>以下是您的訂單資訊: </p>
+  <div className="p-8">
+    <p className="text-lg font-semibold">以下是您的訂單資訊: </p>
     <br></br>
     <hr/>
     <br></br>
@@ -13,7 +13,7 @@ const ShowPage2 = (props)=> {
     <p>湯品: {state.soup}</p>
     <p>取餐者姓名: {state.name}</p>
     <p>取餐者電話: {state.tel}</p>
-  </>
+  </div>
   )
 }
 
